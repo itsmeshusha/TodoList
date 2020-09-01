@@ -3,6 +3,8 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import { AddItemForm } from './AddItemForm';
+import { Button, AppBar, Toolbar, IconButton, Typography, Container, Grid, Paper } from '@material-ui/core';
+import { Menu } from '@material-ui/icons'
 
 export type TaskType = {
     id: string
@@ -118,7 +120,24 @@ function changeTodoListTitle (todoListID: string, newTitle: string) {
 
     return (
         <div className="App">
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start"
+                    color="inherit"
+                    aria-label="menu">
+                        <Menu />
+                    </IconButton>
+                    <Typography variant="h6" >
+                        News
+                    </Typography>
+                    <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+            <Container fixed>
+                <Grid container style={{padding: "20px"}}>
             <AddItemForm addItem={addTodoList} />
+            </Grid>
+            <Grid container spacing={3}>
             {
                 todoLists.map(tl => {
                     let tasksForTodoList = tasks[tl.id];
@@ -128,7 +147,8 @@ function changeTodoListTitle (todoListID: string, newTitle: string) {
     if(tl.filter ==="completed") {
         tasksForTodoList = tasks[tl.id].filter(t=>t.isDone === true)
     }
-                    return(
+                    return <Grid item>
+                        <Paper style={{padding:"10px"}}>
                         <Todolist 
                         key={tl.id}
                         id={tl.id}
@@ -143,12 +163,13 @@ function changeTodoListTitle (todoListID: string, newTitle: string) {
                         changeTaskTitle={changeTaskTitle}
                         changeTodoListTitle={changeTodoListTitle}
 
-                        />  
-                    )
-                } )
+                        /> 
+                        </Paper> 
+                    </Grid>
+                }) 
             }
-            
-            
+            </Grid>
+            </Container>
             </div>
     );
 }
