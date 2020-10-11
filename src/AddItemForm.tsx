@@ -50,7 +50,7 @@ export const AddItemForm = React.memo(function(props: AddItemFormPropsType) {
             <IconButton
                 color="primary"
                 onClick={onAddTaskClick}>
-                <AddBox />
+                <AddBox /> 
             </IconButton>
 
             {/* { error && <div className="error-message">{error}</div>} */}
